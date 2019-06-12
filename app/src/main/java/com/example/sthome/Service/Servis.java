@@ -23,7 +23,7 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 public class Servis extends Service {
-    TextView lblGaz;
+
     String gaz;
     @Nullable
     @Override
@@ -34,7 +34,7 @@ public class Servis extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        lblGaz= (TextView) lblGaz.findViewById(R.id.lblGaz);
+
         new gazCek().execute();
 
         if(Integer.valueOf(gaz)>200){
@@ -62,8 +62,6 @@ public class Servis extends Service {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
-            lblGaz.setText(gaz);
         }
 
     }
