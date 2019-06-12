@@ -8,11 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.example.sthome.Service.BekServis;
-import com.example.sthome.Service.Servis;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
