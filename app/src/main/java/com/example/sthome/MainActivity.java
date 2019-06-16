@@ -12,6 +12,7 @@ import com.example.sthome.Service.BekServis;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -105,19 +106,31 @@ public class MainActivity extends AppCompatActivity {
             Document doc3 = Jsoup.connect("https://thingspeak.com/channels/763927/field/3/last.html").get();
             Document doc4 = Jsoup.connect("https://thingspeak.com/channels/763927/field/4/last.html").get();
 
-            gaz = doc3.text();//Document doc =Jsoup.connect("https://thingspeak.com/channels/763927/field/1/last.html").get();
+            gaz = doc3.text();
             sicaklik = doc.text();
             toprakNem = doc2.text();
             hirsizDurum = doc4.text();
-            lblSicaklik.setText(sicaklik);
-            if(hirsizDurum == "1") {
-                lblhirsizDurum.setText("Tehlike!");
-            }
-            else {
-                lblhirsizDurum.setText("Tehlike Yok");
-            }
-            lblTnem.setText(toprakNem);
-            lblGaz.setText(gaz);
+
+            Handler mainHandler = new Handler(getMainLooper());
+
+            Runnable myRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    lblSicaklik.setText(sicaklik);
+                    if(hirsizDurum == "1") {
+                        lblhirsizDurum.setText("Tehlike!");
+                    }
+                    else {
+                        lblhirsizDurum.setText("Tehlike Yok");
+                    }
+                    lblTnem.setText(toprakNem);
+                    lblGaz.setText(gaz);
+
+                } // This is your code
+            };
+            mainHandler.post(myRunnable);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
